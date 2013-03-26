@@ -1,0 +1,46 @@
+<html>
+<head>
+
+<title>first test on Rapheal</title>
+
+</head>
+
+   <body>
+     <h4>A smaple of pie chart distribution <br/></h4>
+     <div id="paperDiv" style="width:100%;height:100%;border: 1px solid #ddd;"></div>
+
+     <!--div at the bottom of the page-->
+     <script src="scripts/rapheal/raphael-min.js"></script>        
+     <script src="scripts/rapheal/g.raphael-min.js"></script>
+     <script src="scripts/rapheal/g.pie-min.js"></script>
+     
+     
+
+     <script>
+        // Creates canvas 640 × 480 at 10, 50
+	var r = Raphael("paperDiv",640,480);
+	// Creates pie chart at with center at 320, 200,
+	// radius 100 and data: [55, 20, 13, 32, 5, 1, 2]
+	//r.piechart(320, 240, 80, [55, 20, 13, 32, 5, 1, 2,60,120]);
+	pie = r.piechart(160, 150, 120, [20,30,40,10], { legend: ["%% boaring", "%% funny","%% genius","%% cool"],href: ["http://raphaeljs.com", "http://g.raphaeljs.com"]});
+	r.text(400, 90, "Pie Chart :Interactive:").attr({ font: "20px sans-serif" });
+	pie.hover(function () {
+        this.sector.stop();
+        this.sector.scale(1.1, 1.1, this.cx, this.cy);
+	
+        if (this.label) {
+        this.label[0].stop();
+        this.label[0].attr({ r: 7.5 });
+        this.label[1].attr({ "font-weight": 800 });
+        }
+        }, function () {
+        this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
+
+        if (this.label) {
+        this.label[0].animate({ r: 5 }, 500, "bounce");
+        this.label[1].attr({ "font-weight": 400 });
+        }
+        });
+	
+     </script>
+</html>

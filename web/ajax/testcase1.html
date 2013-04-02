@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var xmlhttp;
+function loadXMLDoc(url,cfunc)
+{
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=cfunc;
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+
+
+function myFunction()
+{
+loadXMLDoc("../aljazeera/countries.dat",function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+processData(xmlhttp.responseText);
+    }
+  });
+}
+
+
+function processData(allText) {
+    var lines = allText.split(/\r\n|\n/);
+//    var eachline = allTextLines[0].split(' ');
+//alert(headers);
+var datax= [];
+var datay= [];
+
+    for (var i=0; i<lines.length -1; i++) {
+        
+	var eachline = lines[i].split(' ');
+	datax[i]=eachline[0];
+	datay[i]=eachline[1];
+	alert("countryName: "+datay[i]+" with newsNo: "+datax[i]);
+}
+}
+
+
+
+</script>
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="myFunction()">Change Content</button>
+
+</body>
+</html>
+
